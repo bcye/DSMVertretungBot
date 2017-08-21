@@ -1,0 +1,30 @@
+{
+  "name": "dsmvertretungbot",
+  "version": "1.0.0",
+  "description": "Telegram bot that notifies users with the substitutions of the day",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"¯\\_(ツ)_/¯\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatiasConTilde/DSMVertretungBot.git"
+  },
+  "keywords": [
+    "telegram",
+    "vertretung"
+  ],
+  "author": "Matías con tilde",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MatiasConTilde/DSMVertretungBot/issues"
+  },
+  "homepage": "https://github.com/MatiasConTilde/DSMVertretungBot#readme",
+  "dependencies": {
+    "firebase": "^4.2.0",
+    "moment": "^2.18.1",
+    "node-telegram-bot-api": "^0.28.0",
+    "tabletojson": "^0.6.0"
+  }
+}
