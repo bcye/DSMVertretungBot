@@ -153,7 +153,7 @@ function sendVertretungen(id) {
     }
 
     if (!accountExists) {
-      bot.sendMessage(msg.chat.id, 'Account doesn\'t exist!\nDo you want to /create an account?');
+      bot.sendMessage(id, 'Account doesn\'t exist!\nDo you want to /create an account?');
     }
   });
 }
