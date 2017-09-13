@@ -172,12 +172,12 @@ setInterval(function() {
 setInterval(function() {
   request(URL, (err, res, body) => {
     table.once('value', tableData => {
-      const lastUpdate = require('moment')(/\d{2}\.\d{2}\.\d{4} \d{2}:\d{2}/.exec(body)[0], 'DD-MM-YYYY HH-mm').toDate().getTime();
+      const lastUpdate = require('moment')(/\d\d\.\d\d\.\d\d\d\d \d\d:\d\d/.exec(body)[0], 'DD-MM-YYYY HH-mm').toDate().getTime();
 
       if (tableData.val().lastSaved < lastUpdate) {
         tabletojson.convertUrl(URL, tables => {
           table.set({
-            table: tables[1],
+            table: tables[0],
             lastSaved: lastUpdate
           });
         });
