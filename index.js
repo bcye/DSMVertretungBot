@@ -177,7 +177,7 @@ setInterval(function() {
       if (tableData.val().lastSaved < lastUpdate) {
         tabletojson.convertUrl(URL, tables => {
           table.set({
-            table: tables[0],
+            table: tables[tables.length - 1],
             lastSaved: lastUpdate
           });
         });
