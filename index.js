@@ -46,7 +46,10 @@ bot.onText(/^\/create (.+)/, (msg, match) => {
       if (!exists) {
         users.push({
           id: msg.chat.id,
-          class: args[0],
+          class: {
+              number: /\d{1,2}/.exec(args[0])[0],
+              letter: /[a-f]/.exec(args[0])[0]
+            },
           time: args[1]
         });
 
@@ -72,7 +75,10 @@ bot.onText(/^\/update (.+)/, (msg, match) => {
       for (var i in usersData.val()) {
         if (usersData.val()[i].id === msg.chat.id) {
           users.child(i).update({
-            class: args[0],
+            class: {
+              number: /\d{1,2}/.exec(args[0])[0],
+              letter: /[a-f]/.exec(args[0])[0]
+            },
             time: args[1]
           });
           exists = true;
@@ -131,7 +137,7 @@ function sendVertretungen(id) {
 
           for (var j = 0; j < tableData.val().table.length; j++) {
             const eintrag = tableData.val().table[j];
-            if (eintrag['Klasse(n)'] === usersData.val()[i].class) {
+            if (new RegExp(usersData.val()[i].class.number + '.*' + usersData.val()[i].class.letter).test(eintrag['Klasse(n)'])) {
               substitutionExists = true;
 
               var message = '';
