@@ -162,7 +162,7 @@ setInterval(function() {
   users.once('value', usersData => {
     for (var i in usersData.val()) {
       const now = new Date();
-      if (usersData.val()[i].time == ('0' + (process.env.IS_HEROKU ? (now.getHours() + 2) % 24 : now.getHours())).slice(-2) + ':' + ('0' + now.getMinutes()).slice(-2)) {
+      if (usersData.val()[i].time == ('0' + (process.env.IS_HEROKU ? (now.getHours() + 2) % 24 : now.getHours())).slice(-2) + ':' + ('0' + now.getMinutes()).slice(-2) && now.getDay() != 6 && now.getDay() != 0) {
         sendVertretungen(usersData.val()[i].id);
       }
     }
