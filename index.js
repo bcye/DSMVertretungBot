@@ -131,13 +131,13 @@ function sendVertretungen(id) {
               substitutionExists = true;
 
               var message = '';
-              if (eintrag['Stunde']) message += 'Stunde: ' + eintrag['Stunde'] + '\n';
-              if (eintrag['Fach']) message += 'Fach: ' + eintrag['Fach'] + '\n';
-              if (eintrag['Lehrer']) message += 'Lehrer: ' + eintrag['Lehrer'] + '\n';
-              if (eintrag['(Fach)']) message += 'Statt Fach: ' + eintrag['(Fach)'] + '\n';
-              if (eintrag['(Lehrer)']) message += 'Statt Lehrer: ' + eintrag['(Lehrer)'] + '\n';
-              if (eintrag['Raum'] != '---') message += 'Raum: ' + eintrag['Raum'] + '\n';
-              if (eintrag['Vertretungs-Text']) message += 'Mehr info: ' + eintrag['Vertretungs-Text'] + '\n';
+              if (eintrag['Stunde']          ) message += 'Stunde: '       + eintrag['Stunde']           + '\n';
+              if (eintrag['Fach']            ) message += 'Fach: '         + eintrag['Fach']             + '\n';
+              if (eintrag['Lehrer']          ) message += 'Lehrer: '       + eintrag['Lehrer']           + '\n';
+              if (eintrag['(Fach)']          ) message += 'Statt Fach: '   + eintrag['(Fach)']           + '\n';
+              if (eintrag['(Lehrer)']        ) message += 'Statt Lehrer: ' + eintrag['(Lehrer)']         + '\n';
+              if (eintrag['Raum'] != '---'   ) message += 'Raum: '         + eintrag['Raum']             + '\n';
+              if (eintrag['Vertretungs-Text']) message += 'Mehr info: '    + eintrag['Vertretungs-Text'] + '\n';
               message.slice(0, -1);
 
               bot.sendMessage(id, message);
