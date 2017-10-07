@@ -110,6 +110,10 @@ bot.onText(/^\/delete/, (msg, match) => {
   });
 });
 
+bot.onText(/^\/url/, (msg, match) => {
+  bot.sendMessage(msg.chat.id, URL);
+});
+
 bot.onText(/^\/get/, (msg, match) => {
   sendVertretungen(msg.chat.id);
 });
