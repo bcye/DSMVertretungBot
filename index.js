@@ -21,7 +21,7 @@ const request = require('request');
 const URL = 'http://dsmadrid.org/wp-content/uploads/sustituciones/dsm-vertretungp-klassen-heute.htm';
 
 bot.onText(/^(\/help|\/start)/, (msg, match) => {
-  bot.sendMessage(msg.chat.id, 'Welcome to this bot. To create an account, send the /create command followed by your class and preferred time separated by spaces, for example: `/create 10f 08:10`\nYou can also /delete your account and /update it with the same arguments as /create.\nTo see your currents substitutions, you can /get them anytime', {
+  bot.sendMessage(msg.chat.id, 'Welcome to this bot. To create an account, send the /create command followed by your class and preferred time separated by spaces, for example: `/create 10f 08:10`\nYou can also /delete your account and /update it with the same arguments as /create.\nTo see your currents substitutions, you can /get them anytime. Now what da fuk happens with this bot (updates) in @DSMNews', {
     'parse_mode': 'Markdown'
   });
 });
@@ -47,9 +47,9 @@ bot.onText(/^\/create (.+)/, (msg, match) => {
         users.push({
           id: msg.chat.id,
           class: {
-              number: /\d{1,2}/.exec(args[0])[0],
-              letter: /[a-f]/.exec(args[0])[0]
-            },
+            number: /\d{1,2}/.exec(args[0])[0],
+            letter: /[a-f]/.exec(args[0])[0]
+          },
           time: args[1]
         });
 
@@ -133,6 +133,7 @@ function sendVertretungen(id) {
         accountExists = true;
 
         table.once('value', tableData => {
+          if (tableData.val().message) bot.sendMessage(id, tableData.val().message);
           var substitutionExists = false;
 
           for (var j = 0; j < tableData.val().table.length; j++) {
@@ -172,7 +173,7 @@ setInterval(function() {
   users.once('value', usersData => {
     for (var i in usersData.val()) {
       const now = new Date();
-      if (usersData.val()[i].time == ('0' + (process.env.IS_HEROKU ? (now.getHours() + 2) % 24 : now.getHours())).slice(-2) + ':' + ('0' + now.getMinutes()).slice(-2) && now.getDay() != 6 && now.getDay() != 0) {
+      if (usersData.val()[i].time == ('0' + (process.env.IS_HEROKU ? (now.getHours() + 1) % 24 : now.getHours())).slice(-2) + ':' + ('0' + now.getMinutes()).slice(-2) && now.getDay() != 6 && now.getDay() != 0) {
         sendVertretungen(usersData.val()[i].id);
       }
     }
@@ -187,6 +188,7 @@ setInterval(function() {
       if (tableData.val().lastSaved < lastUpdate) {
         tabletojson.convertUrl(URL, tables => {
           table.set({
+            message: tables.length > 1 ? tables[0][0]['Nachrichten zum Tag'] : '',
             table: tables[tables.length - 1],
             lastSaved: lastUpdate
           });
