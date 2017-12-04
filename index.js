@@ -1,3 +1,5 @@
+// tabletojson has a .convertUrl{} method. You can interate over every cloumn and add these to the db to get the substitutions
+
 const TelegramBot = require('node-telegram-bot-api');
 const bot = new TelegramBot(process.env.API_KEY, {
   polling: true
